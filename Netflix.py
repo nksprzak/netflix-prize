@@ -60,8 +60,18 @@ def netflix_solve(r, w):
     r a reader
     w a writer
     """
-    for s in r:
-        i, j = netflix_read(s)
+    current_movie = -1
+    current_movie_dict = {-1: []}
+    for movie in r:
+        i, j = netflix_read(movie)
         if j == ':':
-            v = netflix_eval(i, j)
-            netflix_print(w, i, j, v)
+            # if not current_movie == -1:
+                # do something to associate gathered data with current movie
+                # netflix_eval(current_movie)
+            current_movie = i
+            current_movie_dict = {i: []}
+        else:
+            current_movie_dict[current_movie].append(i)
+                # todo: write some other logic for this .... maybe store the average.
+                # v = netflix_eval(i, j)
+                # netflix_print(w, i, j, v)
