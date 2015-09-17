@@ -18,8 +18,13 @@ def netflix_read(s):
     s a string
     return a list of two ints, representing the beginning and end of a range, [i, j]
     """
-    a = s.split()
-    return [int(a[0]), int(a[1])]
+    if ':' in s:
+        a = s.strip(' \n')
+        num = int(a.strip(':'))
+        val = [num, ':']
+        return val
+    else:
+        return [int(s.strip('\n')), '']
 
 # ------------
 # netflix_eval
@@ -57,5 +62,6 @@ def netflix_solve(r, w):
     """
     for s in r:
         i, j = netflix_read(s)
-        v = netflix_eval(i, j)
-        netflix_print(w, i, j, v)
+        if j == ':':
+            v = netflix_eval(i, j)
+            netflix_print(w, i, j, v)

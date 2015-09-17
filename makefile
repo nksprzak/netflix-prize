@@ -7,11 +7,12 @@ FILES :=                              \
     Netflix.html                      \
     Netflix.log                       \
     Netflix.py                        \
-    RunNetflix.in                     \
-    RunNetflix.out                    \
     RunNetflix.py                     \
+    RunNetflix.out                    \
     TestNetflix.out                   \
-    TestNetflix.py
+    TestNetflix.py                    \
+    probe.txt
+
 
 check:
 	@not_found=0;                                 \
@@ -66,8 +67,8 @@ Netflix.html: Netflix.py
 Netflix.log:
 	git log > Netflix.log
 
-RunNetflix.tmp: RunNetflix.in RunNetflix.out RunNetflix.py
-	./RunNetflix.py < RunNetflix.in > RunNetflix.tmp
+RunNetflix.tmp: probe.txt RunNetflix.out RunNetflix.py
+	./RunNetflix.py < probe.txt > RunNetflix.tmp
 	diff RunNetflix.tmp RunNetflix.out
 
 TestNetflix.tmp: TestNetflix.py
