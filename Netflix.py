@@ -8,6 +8,7 @@
 
 import numpy
 import json
+#import zip
 
 # ------------
 # netflix_read
@@ -43,11 +44,11 @@ def netflix_eval(movie_ave, cust_ave):
 # netflix_get_rsme
 # ----------------
 
-def netflix_get_rsme(expected, actual):
+def netflix_get_rsme(actual, expected):
     """
     ....
     """
-    rmse = numpy.sqrt(numpy.mean(numpy.square(expected - actual)))
+    rmse = numpy.sqrt(numpy.mean(numpy.square(numpy.subtract(actual, expected))))
 
     return rmse
 
@@ -95,6 +96,20 @@ def netflix_solve(r, w):
             #w.write("   est_review:" + str(v) + "\n")
             netflix_print(w, v)
         # remove this stuff later
-        index -= 1
-        if index == 0:
-            break
+        #index -= 1
+        #if index == 0:
+         #   break
+    # actArr = []
+    # estArr = []
+    # with open("RunNetflix.out") as textfile1, open("probe_actual.txt") as textfile2: 
+    #     for x, y in zip(textfile1, textfile2):
+    #         i, j = netflix_read(x)
+    #         if (j == ':'):
+    #             continue
+    #         x = int(x.strip())
+    #         y = int(y.strip())
+    #         actArr.append(x)
+    #         estArr.append(y)
+
+    # res = netflix_get_rsme(actArr, estArr)
+    # netflix_print(w, res)       
