@@ -6,7 +6,8 @@
 # Glenn P. Downing
 # ---------------------------
 
-import sys
+import numpy
+import json
 
 # ------------
 # netflix_read
@@ -30,18 +31,31 @@ def netflix_read(s):
 # netflix_eval
 # ------------
 
-def netflix_eval(first, second):
+def netflix_eval(movie_ave, cust_ave):
     """
     ....
     """
+    # todo: include skew
+    return numpy.mean([movie_ave, cust_ave])
 
-    return -1
+
+# ----------------
+# netflix_get_rsme
+# ----------------
+
+def netflix_get_rsme(expected, actual):
+    """
+    ....
+    """
+    rmse = numpy.sqrt(numpy.mean(numpy.square(expected - actual)))
+
+    return rmse
 
 # -------------
 # netflix_print
 # -------------
 
-def netflix_print(w, i, j, v):
+def netflix_print(w, i):
     """
     print three ints
     w a writer
@@ -49,7 +63,7 @@ def netflix_print(w, i, j, v):
     j the end       of the range, inclusive
     v the max cycle length
     """
-    w.write(str(i) + " " + str(j) + " " + str(v) + "\n")
+    w.write(str(i) + " " + "\n")
 
 # -------------
 # netflix_solve
@@ -60,18 +74,22 @@ def netflix_solve(r, w):
     r a reader
     w a writer
     """
+    with open('/u/ebanner/netflix-tests/ldy224-movie_avg_score.json') as data_file:
+        movie_ave_score = json.load(data_file)
+
+    with open('/u/ebanner/netflix-tests/crb3385-user_ratings_avg.json') as data_file:
+        cust_ave_score = json.load(data_file)
     current_movie = -1
-    current_movie_dict = {-1: []}
-    for movie in r:
-        i, j = netflix_read(movie)
+    index = 10
+    for num in r:
+        i, j = netflix_read(num)
         if j == ':':
-            # if not current_movie == -1:
-                # do something to associate gathered data with current movie
-                # netflix_eval(current_movie)
+            netflix_print(w, num)
             current_movie = i
-            current_movie_dict = {i: []}
         else:
-            current_movie_dict[current_movie].append(i)
-                # todo: write some other logic for this .... maybe store the average.
-                # v = netflix_eval(i, j)
-                # netflix_print(w, i, j, v)
+            v = netflix_eval(current_movie,  movie_ave_score[current_movie], i, cust_ave_score[i])
+            netflix_print(v)
+        # remove this stuff later
+        index -= 1
+        if index == 0:
+            break
