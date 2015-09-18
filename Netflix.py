@@ -79,16 +79,24 @@ def netflix_solve(r, w):
 
     with open('/u/ebanner/netflix-tests/crb3385-user_ratings_avg.json') as data_file:
         cust_ave_score = json.load(data_file)
+    w.write("movie score len: " + str(len(movie_ave_score)) + "\n")
+    w.write("cust score len: " + str(len(cust_ave_score)) + "\n")
+    w.write("movie #1 score:" + str(movie_ave_score["1"]) + "\n")
     current_movie = -1
     index = 10
     for num in r:
         i, j = netflix_read(num)
         if j == ':':
-            netflix_print(w, num)
+            w.write("current_movie:" + str(current_movie) + "\n")
+            #netflix_print(w, num)
             current_movie = i
         else:
-            v = netflix_eval(current_movie,  movie_ave_score[current_movie], i, cust_ave_score[i])
-            netflix_print(v)
+            #w.write("current_movie:" + str(current_movie) + "\n")
+            w.write("customer:" + str(i) + "\n")
+            w.write("   movie score:" + str(movie_ave_score[str(current_movie)]) + "\n")
+            v = netflix_eval(movie_ave_score[str(current_movie)], cust_ave_score[str(i)])
+            w.write("   est_review:" + str(v) + "\n")
+            #netflix_print(w, v)
         # remove this stuff later
         index -= 1
         if index == 0:
