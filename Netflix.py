@@ -70,31 +70,67 @@ def netflix_print(w, i):
 # netflix_solve
 # -------------
 
+
+# def netflix_read_2(s):
+#     """
+#     read two ints
+#     s a string
+#     return a list of two ints, representing the beginning and end of a range, [i, j]
+#     """
+#     if ':' in s:
+#         a = s.strip(' \n')
+#         num = int(a.strip(':'))
+#         val = [num, ':']
+#         return val
+#     else:
+#         return s.strip('\n')
+
+
 def netflix_solve(r, w):
     """
     r a reader
     w a writer
     """
-    with open('/u/ebanner/netflix-tests/ldy224-movie_avg_score.json') as data_file:
-        movie_ave_score = json.load(data_file)
-
-    with open('/u/ebanner/netflix-tests/crb3385-user_ratings_avg.json') as data_file:
-        cust_ave_score = json.load(data_file)
-    current_movie = -1
-    index = 10
+    customer_map = {}
     for num in r:
-        i, j = netflix_read(num)
-        if j == ':':
-            #w.write("current_movie:" + str(current_movie) + "\n")
-            netflix_print(w, num)
-            current_movie = i
-        else:
-            #w.write("current_movie:" + str(current_movie) + "\n")
-            #w.write("customer:" + str(i) + "\n")
-            #w.write("   movie score:" + str(movie_ave_score[str(current_movie)]) + "\n")
-            v = netflix_eval(movie_ave_score[str(current_movie)], cust_ave_score[str(i)])
-            #w.write("   est_review:" + str(v) + "\n")
-            netflix_print(w, v)
+        # i, j = netflix_read_2(num)
+        if not ':' in num:
+            i = num.split(",")[0]
+            if str(i) in customer_map:
+                customer_map[str(i)] += 1
+            else: 
+                customer_map[str(i)] = 1
+
+    w.write("{")
+    map_len = len(customer_map)
+    index = 0
+    for i in customer_map:
+        w.write("\"" + str(i) + "\"" + ":")
+        w.write(str(customer_map[str(i)]))
+        if index != map_len - 1:
+            w.write(", ")
+        index += 1
+    w.write("}")
+    # with open('/u/ebanner/netflix-tests/ldy224-movie_avg_score.json') as data_file:
+    #     movie_ave_score = json.load(data_file)
+
+    # with open('/u/ebanner/netflix-tests/crb3385-user_ratings_avg.json') as data_file:
+    #     cust_ave_score = json.load(data_file)
+    # current_movie = -1
+    # index = 10
+    # for num in r:
+    #     i, j = netflix_read(num)
+    #     if j == ':':
+    #         #w.write("current_movie:" + str(current_movie) + "\n")
+    #         netflix_print(w, num)
+    #         current_movie = i
+    #     else:
+    #         #w.write("current_movie:" + str(current_movie) + "\n")
+    #         #w.write("customer:" + str(i) + "\n")
+    #         #w.write("   movie score:" + str(movie_ave_score[str(current_movie)]) + "\n")
+    #         v = netflix_eval(movie_ave_score[str(current_movie)], cust_ave_score[str(i)])
+    #         #w.write("   est_review:" + str(v) + "\n")
+    #         netflix_print(w, v)
         # remove this stuff later
         #index -= 1
         #if index == 0:
