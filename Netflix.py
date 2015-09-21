@@ -92,6 +92,9 @@ def netflix_solve(r, w):
     w a writer
     """
 
+    # with open('/u/ebanner/netflix-tests/ldy224-movie_avg_score.json') as data_file:
+    #     movie_ave_score = json.load(data_file)
+
     # w.write("{")
     # customer_map = {}
     # for i in range(1, 17771):
@@ -100,20 +103,31 @@ def netflix_solve(r, w):
     #     path = '/u/downing/cs/netflix/training_set/mv_00' + zeros + istr + '.txt'
     #     index = 0
     #     with open(path) as data_file:
+    #         movie_id = 0
     #         for line in data_file:
+    #             if index == 0:
+    #                 movie_id = line[:-2]
     #             if index != 0:
     #                 i = line.split(",")[0]
+    #                 j = line.split(",")[1]
     #                 if str(i) in customer_map:
-    #                     customer_map[str(i)] += 1
+    #                     count = customer_map[str(i)]["count"]
+    #                     customer_map[str(i)]["count"] += 1
+    #                     ave_by_movie = customer_map[str(i)]["ave_by_movie"]
+    #                     print("old_ave: " + str(ave_by_movie))
+    #                     customer_map[str(i)]["ave_by_movie"] = (ave_by_movie * count + (int(j) - movie_ave_score[str(movie_id)])) / (count + 1)
+    #                     print("new_ave: " + str((ave_by_movie * count + (int(j) - movie_ave_score[str(movie_id)])) / (count + 1)))
     #                 else: 
-    #                     customer_map[str(i)] = 1
+    #                     customer_map[str(i)] = {"count": 1, "ave_by_movie": (int(j) - movie_ave_score[str(movie_id)])}
+    #                     # customer_map[str(i)]["ave_by_movie"] = (j - movie_ave_score[str(i)])
     #             index += 1
                 
     # map_len = len(customer_map)
     # index = 0
     # for i in customer_map:
-    #     w.write("\"" + str(i) + "\"" + ":")
-    #     w.write(str(customer_map[str(i)]))
+    #     w.write("\"" + str(i) + "\"" + ":" + "{")
+    #     w.write("\"count\" :" + str(customer_map[str(i)]["count"]) + ", " + "\"ave_by_movie\": " + str(customer_map[str(i)]["ave_by_movie"]))
+    #     w.write("}")
     #     if index != map_len - 1:
     #         w.write(", ")
     #     index += 1
@@ -128,14 +142,17 @@ def netflix_solve(r, w):
     with open('/u/ebanner/netflix-tests/crb3385-user_ratings_avg.json') as data_file:
         cust_ave_score = json.load(data_file)
     
-    with open('UserVoteCount.json') as data_file:
+    with open('UserContent.json') as data_file:
         cust_rating_count = json.load(data_file)
 
     total_ratings = 0
     total_users = 0
     total_max = 0
     for i in cust_rating_count:
-        cur_count = int(cust_rating_count[str(i)])
+        cur_count = int(cust_rating_count[str(i)]["count"])
+        # cur_ave = float(cust_rating_count[str(i)]["ave_by_movie"])
+        # print("count " + str(cur_count))
+        # print("ave " + str(cur_ave))
         total_users += 1;
         total_ratings += cur_count
         if (cur_count) > total_max:
@@ -157,14 +174,14 @@ def netflix_solve(r, w):
             #w.write("current_movie:" + str(current_movie) + "\n")
             #w.write("customer:" + str(i) + "\n")
             #w.write("   movie score:" + str(movie_ave_score[str(current_movie)]) + "\n")
-            if abs(int(cust_rating_count[str(i)]) - total_rating_count_ave) > 13000:
+            if abs(int(cust_rating_count[str(i)]["count"]) - total_rating_count_ave) > 13000:
                 # print("going by user skew")
-                user_skew = (.5 * abs(.5 - abs(int(cust_rating_count[str(i)]) - total_rating_count_ave) // (total_max - total_rating_count_ave))) // 2
+                user_skew = (.5 * abs(.5 - abs(int(cust_rating_count[str(i)]["count"]) - total_rating_count_ave) // (total_max - total_rating_count_ave))) // 2
                 # print("" + str(user_skew) )
-                v = netflix_eval(user_skew * movie_ave_score[str(current_movie)], (1 - user_skew) *cust_ave_score[str(i)])
+                v = netflix_eval(user_skew * movie_ave_score[str(current_movie)] + cust_rating_count[str(i)]["ave_by_movie"], (1 - user_skew) * cust_ave_score[str(i)])
             else:
                 # print("Not going by user skew")
-                v = netflix_eval(movie_ave_score[str(current_movie)], cust_ave_score[str(i)])
+                v = netflix_eval(movie_ave_score[str(current_movie)] + cust_rating_count[str(i)]["ave_by_movie"], cust_ave_score[str(i)])
             #w.write("   est_review:" + str(v) + "\n")
             netflix_print(w, v)
         # remove this stuff later
