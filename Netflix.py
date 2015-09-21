@@ -157,9 +157,9 @@ def netflix_solve(r, w):
             #w.write("current_movie:" + str(current_movie) + "\n")
             #w.write("customer:" + str(i) + "\n")
             #w.write("   movie score:" + str(movie_ave_score[str(current_movie)]) + "\n")
-            if abs(int(cust_rating_count[str(i)]) - total_rating_count_ave) > 5000:
+            if abs(int(cust_rating_count[str(i)]) - total_rating_count_ave) > 13000:
                 # print("going by user skew")
-                user_skew = abs(int(cust_rating_count[str(i)]) - total_rating_count_ave) // (total_max - total_rating_count_ave)
+                user_skew = (.5 * abs(.5 - abs(int(cust_rating_count[str(i)]) - total_rating_count_ave) // (total_max - total_rating_count_ave))) // 2
                 # print("" + str(user_skew) )
                 v = netflix_eval(user_skew * movie_ave_score[str(current_movie)], (1 - user_skew) *cust_ave_score[str(i)])
             else:
