@@ -91,7 +91,18 @@ def netflix_solve(r, w):
     r a reader
     w a writer
     """
-
+    w.write("{")
+    index = 0
+    with open('/u/downing/cs/netflix/movie_titles.txt', encoding = "ISO-8859-1") as data_file:
+        for line in data_file:
+            movie = line.split(",")[0]
+            #print(movie)
+            year = line.split(",")[1]
+            w.write("\"" + movie + "\"" + ": " + year)
+            if index != 17770:
+                w.write(", ")
+            index += 1
+    w.write("}")
     # with open('/u/ebanner/netflix-tests/ldy224-movie_avg_score.json') as data_file:
     #     movie_ave_score = json.load(data_file)
 
@@ -135,70 +146,62 @@ def netflix_solve(r, w):
 
 
 
-
-    with open('/u/ebanner/netflix-tests/ldy224-movie_avg_score.json') as data_file:
-        movie_ave_score = json.load(data_file)
-
-    with open('/u/ebanner/netflix-tests/crb3385-user_ratings_avg.json') as data_file:
-        cust_ave_score = json.load(data_file)
-    
-    with open('UserContent.json') as data_file:
-        cust_rating_count = json.load(data_file)
-
-    total_ratings = 0
-    total_users = 0
-    total_max = 0
-    for i in cust_rating_count:
-        cur_count = int(cust_rating_count[str(i)]["count"])
-        # cur_ave = float(cust_rating_count[str(i)]["ave_by_movie"])
-        # print("count " + str(cur_count))
-        # print("ave " + str(cur_ave))
-        total_users += 1;
-        total_ratings += cur_count
-        if (cur_count) > total_max:
-            total_max = cur_count
-    total_rating_count_ave = total_ratings // total_users
-    # print("total_ratings" + str(total_ratings))
-    # print("total_users" + str(total_users))
-    # print("total max" + str(total_max))
-    # print("total rating count ave" + str(total_rating_count_ave))
-    current_movie = -1
-    index = 20
-    for num in r:
-        i, j = netflix_read(num)
-        if j == ':':
-            #w.write("current_movie:" + str(current_movie) + "\n")
-            netflix_print(w, num)
-            current_movie = i
-        else:
-            #w.write("current_movie:" + str(current_movie) + "\n")
-            #w.write("customer:" + str(i) + "\n")
-            #w.write("   movie score:" + str(movie_ave_score[str(current_movie)]) + "\n")
-            if abs(int(cust_rating_count[str(i)]["count"]) - total_rating_count_ave) > 13000:
-                # print("going by user skew")
-                user_skew = (.5 * abs(.5 - abs(int(cust_rating_count[str(i)]["count"]) - total_rating_count_ave) // (total_max - total_rating_count_ave))) // 2
-                # print("" + str(user_skew) )
-                v = netflix_eval(user_skew * movie_ave_score[str(current_movie)] + cust_rating_count[str(i)]["ave_by_movie"], (1 - user_skew) * cust_ave_score[str(i)])
-            else:
-                # print("Not going by user skew")
-                v = netflix_eval(movie_ave_score[str(current_movie)] + cust_rating_count[str(i)]["ave_by_movie"], cust_ave_score[str(i)])
-            #w.write("   est_review:" + str(v) + "\n")
-            netflix_print(w, v)
-        # remove this stuff later
-        # index -= 1
-        # if index == 0:
-        #    break
-    actArr = []
-    estArr = []
-    with open("RunNetflix.out") as textfile1, open("probe_actual.txt") as textfile2: 
-        for x, y in zip(textfile1, textfile2):
-            i, j = netflix_read(x)
-            if (j == ':'):
-                continue
-            x = int(x.strip())
-            y = int(y.strip())
-            actArr.append(x)
-            estArr.append(y)
-
-    res = netflix_get_rsme(actArr, estArr)
-    netflix_print(w, res)       
+#
+#    with open('/u/ebanner/netflix-tests/ldy224-movie_avg_score.json') as data_file:
+#        movie_ave_score = json.load(data_file)
+#
+#    with open('/u/ebanner/netflix-tests/crb3385-user_ratings_avg.json') as data_file:
+#        cust_ave_score = json.load(data_file)
+#    
+#    with open('UserContent.json') as data_file:
+#        cust_rating_count = json.load(data_file)
+#
+#    total_ratings = 0
+#    total_users = 0
+#    total_max = 0
+#    for i in cust_rating_count:
+#        cur_count = int(cust_rating_count[str(i)]["count"])
+#        # cur_ave = float(cust_rating_count[str(i)]["ave_by_movie"])
+#        # print("count " + str(cur_count))
+#        # print("ave " + str(cur_ave))
+#        total_users += 1;
+#        total_ratings += cur_count
+#        if (cur_count) > total_max:
+#            total_max = cur_count
+#    total_rating_count_ave = total_ratings // total_users
+#    # print("total_ratings" + str(total_ratings))
+#    # print("total_users" + str(total_users))
+#    # print("total max" + str(total_max))
+#    # print("total rating count ave" + str(total_rating_count_ave))
+#    current_movie = -1
+#    index = 20
+#    for num in r:
+#        i, j = netflix_read(num)
+#        if j == ':':
+#            netflix_print(w, num)
+#            current_movie = i
+#        else:
+#            if abs(int(cust_rating_count[str(i)]["count"]) - total_rating_count_ave) > 13000:
+#                user_skew = (.5 * abs(.5 - abs(int(cust_rating_count[str(i)]["count"]) - total_rating_count_ave) // (total_max - total_rating_count_ave))) // 2
+#                v = netflix_eval(user_skew * movie_ave_score[str(current_movie)] + cust_rating_count[str(i)]["ave_by_movie"], (1 - user_skew) * cust_ave_score[str(i)])
+#            else:
+#                v = netflix_eval(movie_ave_score[str(current_movie)] + cust_rating_count[str(i)]["ave_by_movie"], cust_ave_score[str(i)])
+#            netflix_print(w, v)
+#        # remove this stuff later
+#        # index -= 1
+#        # if index == 0:
+#        #    break
+#    actArr = []
+#    estArr = []
+#    with open("RunNetflix.out") as textfile1, open("probe_actual.txt") as textfile2: 
+#        for x, y in zip(textfile1, textfile2):
+#            i, j = netflix_read(x)
+#            if (j == ':'):
+#                continue
+#            x = int(x.strip())
+#            y = int(y.strip())
+#            actArr.append(x)
+#            estArr.append(y)
+#
+#    res = netflix_get_rsme(actArr, estArr)
+#    netflix_print(w, res)       
