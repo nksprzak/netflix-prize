@@ -8,6 +8,8 @@
 
 import numpy
 import json
+import requests
+import os
 #import zip
 
 # ------------
@@ -171,33 +173,42 @@ def netflix_solve(r, w):
     # w.write("}") 
 
 
+    if os.path.isfile('/u/ebanner/netflix-tests/scm2454-movie_cache'):
+        with open('/u/ebanner/netflix-tests/scm2454-movie_cache') as data_file:
+            movie_ave_score = json.load(data_file)
+    else:
+        with requests.get('http://www.cs.utexas.edu/users/ebanner/netflix-tests/scm2454-movie_cache') as data_file:
+            movie_ave_score = json.load(data_file)
 
-    with open('/u/ebanner/netflix-tests/scm2454-movie_cache') as data_file:
-        movie_ave_score = json.load(data_file)
+    if os.path.isfile('/u/ebanner/netflix-tests/scm2454-user_cache'):
+        with open('/u/ebanner/netflix-tests/scm2454-user_cache') as data_file:
+            cust_ave_score = json.load(data_file)
 
-    with open('/u/ebanner/netflix-tests/scm2454-user_cache') as data_file:
-        cust_ave_score = json.load(data_file)
+    else:
+        with requests.get('http://www.cs.utexas.edu/users/ebanner/netflix-tests/sscm2454-user_cache') as data_file:
+            cust_ave_score = json.load(data_file)
+
     
-    with open('UserContent.json') as data_file:
-        cust_rating_count = json.load(data_file)
+    # with open('UserContent.json') as data_file:
+    #     cust_rating_count = json.load(data_file)
 
-    with open('movie_rating_count.json') as data_file:
-        movie_rating_count = json.load(data_file)
+    # with open('movie_rating_count.json') as data_file:
+    #     movie_rating_count = json.load(data_file)
 
 
     total_ratings = 0
     total_users = 0
     total_max = 0
-    for i in cust_rating_count:
-        cur_count = int(cust_rating_count[str(i)]["count"])
-        # cur_ave = float(cust_rating_count[str(i)]["ave_by_movie"])
-        # print("count " + str(cur_count))
-        # print("ave " + str(cur_ave))
-        total_users += 1;
-        total_ratings += cur_count
-        if (cur_count) > total_max:
-            total_max = cur_count
-    total_rating_count_ave = total_ratings // total_users
+    # for i in cust_rating_count:
+    #     cur_count = int(cust_rating_count[str(i)]["count"])
+    #     # cur_ave = float(cust_rating_count[str(i)]["ave_by_movie"])
+    #     # print("count " + str(cur_count))
+    #     # print("ave " + str(cur_ave))
+    #     total_users += 1;
+    #     total_ratings += cur_count
+    #     if (cur_count) > total_max:
+    #         total_max = cur_count
+    # total_rating_count_ave = total_ratings // total_users
     # print("total_ratings" + str(total_ratings))
     # print("total_users" + str(total_users))
     # print("total max" + str(total_max))
@@ -223,11 +234,11 @@ def netflix_solve(r, w):
             #             movie_skew *= 1.4
             #         else:
             #             movie_skew *= 1.6
-            if abs(int(cust_rating_count[str(i)]["count"]) - total_rating_count_ave) > 7000:
-                user_skew = ((.5 * abs(.5 - abs(int(cust_rating_count[str(i)]["count"]) - total_rating_count_ave) // (total_max - total_rating_count_ave)))) // 2
-                v = round(3.7 + (user_skew * float(movie_ave_score[str(current_movie)]) - 3.7) + ((1- user_skew) * float(cust_ave_score[str(i)]) - 3.7), 2)
-            else:
-                v = round(3.7 + (float(movie_ave_score[str(current_movie)]) - 3.7) + (float(cust_ave_score[str(i)]) - 3.7), 2)
+            # if abs(int(cust_rating_count[str(i)]["count"]) - total_rating_count_ave) > 7000:
+            #     user_skew = ((.5 * abs(.5 - abs(int(cust_rating_count[str(i)]["count"]) - total_rating_count_ave) // (total_max - total_rating_count_ave)))) // 2
+            #     v = round(3.7 + (user_skew * float(movie_ave_score[str(current_movie)]) - 3.7) + ((1- user_skew) * float(cust_ave_score[str(i)]) - 3.7), 2)
+            # else:
+            v = round(3.7 + (float(movie_ave_score[str(current_movie)]) - 3.7) + (float(cust_ave_score[str(i)]) - 3.7), 2)
             # if v > 5:
             #     v = 5          
             # if abs(int(cust_rating_count[str(i)]["count"]) - total_rating_count_ave) > 40000:
