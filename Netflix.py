@@ -177,16 +177,14 @@ def netflix_solve(r, w):
         with open('/u/ebanner/netflix-tests/scm2454-movie_cache') as data_file:
             movie_ave_score = json.load(data_file)
     else:
-        with requests.get('http://www.cs.utexas.edu/users/ebanner/netflix-tests/scm2454-movie_cache') as data_file:
-            movie_ave_score = json.load(data_file)
+        movie_ave_score = requests.get('http://www.cs.utexas.edu/users/ebanner/netflix-tests/scm2454-movie_cache').json() 
 
     if os.path.isfile('/u/ebanner/netflix-tests/scm2454-user_cache'):
         with open('/u/ebanner/netflix-tests/scm2454-user_cache') as data_file:
             cust_ave_score = json.load(data_file)
 
     else:
-        with requests.get('http://www.cs.utexas.edu/users/ebanner/netflix-tests/sscm2454-user_cache') as data_file:
-            cust_ave_score = json.load(data_file)
+        cust_ave_score = requests.get('http://www.cs.utexas.edu/users/ebanner/netflix-tests/sscm2454-user_cache').json()
 
     
     # with open('UserContent.json') as data_file:
