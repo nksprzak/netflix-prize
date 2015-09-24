@@ -31,54 +31,53 @@ class TestNetflix (TestCase) :
     # ----
 
     def test_read_1 (self) :
-        s = "1 10\n"
+        s = "1:\n"
         i, j = netflix_read(s)
         self.assertEqual(i,  1)
-        self.assertEqual(j, 10)
+        self.assertEqual(j, ":")
 
     def test_read_2 (self) :
-        s = "999999 999999\n"
+        s = "2488120\n"
         i, j = netflix_read(s)
-        self.assertEqual(i, 999999)
-        self.assertEqual(j, 999999)
+        self.assertEqual(i, 2488120)
+        self.assertEqual(j, "")
 
     def test_read_3 (self) :
-        s = "1 2\n"
+        s = "1904905\n"
         i, j = netflix_read(s)
-        self.assertNotEquals(i, 2)
-        self.assertNotEquals(j, 1)
+        self.assertNotEquals(i, 1904906)
 
     # ----
     # eval
     # ----
 
     def test_eval_1 (self) :
-        v = netflix_eval(1, 10)
-        self.assertEqual(v, 20)
+        v = netflix_eval(3.49, 4.63)
+        self.assertEqual(v, 3.3)
 
     def test_eval_2 (self) :
-        v = netflix_eval(100, 200)
-        self.assertEqual(v, 125)
+        v = netflix_eval(3.49, 4.00)
+        self.assertEqual(v, 3.3)
 
     def test_eval_3 (self) :
-        v = netflix_eval(201, 210)
-        self.assertEqual(v, 89)
+        v = netflix_eval(4.19, 3.79)
+        self.assertEqual(v, 4.7)
 
     def test_eval_4 (self) :
-        v = netflix_eval(900, 1000)
-        self.assertEqual(v, 174)
+        v = netflix_eval(3.30, 4.38)
+        self.assertEqual(v, 2.9)
 
     def test_eval_5 (self) :
-        v = netflix_eval(10, 10)
-        self.assertEqual(v, 7)
+        v = netflix_eval(3.30, 4.17)
+        self.assertEqual(v, 2.9)
 
     def test_eval_6 (self) :
-        v = netflix_eval(50, 1)
-        self.assertEqual(v, 112)
+        v = netflix_eval(3.60, 3.44)
+        self.assertEqual(v, 3.5)
 
     def test_eval_7 (self) :
-        v = netflix_eval(100000, 200000)
-        self.assertEqual(v, 383)
+        v = netflix_eval(2.79, 4.00)
+        self.assertEqual(v, 1.9)
 
     # -----
     # print
@@ -86,45 +85,34 @@ class TestNetflix (TestCase) :
 
     def test_print_1 (self) :
         w = StringIO()
-        netflix_print(w, 1, 10, 20)
-        self.assertEqual(w.getvalue(), "1 10 20\n")
+        netflix_print(w, 1.9)
+        self.assertEqual(w.getvalue(), "1.9\n")
 
     def test_print_2 (self) :
         w = StringIO()
-        netflix_print(w, 5259, 1674, 238)
-        self.assertEqual(w.getvalue(), "5259 1674 238\n")
+        netflix_print(w, 2.79)
+        self.assertEqual(w.getvalue(), "2.79\n")
 
     def test_print_3 (self) :
         w = StringIO()
-        netflix_print(w, 97376, 91249, 333)
-        self.assertEqual(w.getvalue(), "97376 91249 333\n")
+        netflix_print(w, 3.5)
+        self.assertEqual(w.getvalue(), "3.5\n")
 
     def test_print_4 (self) :
         w = StringIO()
-        netflix_print(w, 985934, 982492, 427)
-        self.assertEqual(w.getvalue(), "985934 982492 427\n")
+        netflix_print(w, 1904905)
+        self.assertEqual(w.getvalue(), "1904905\n")
 
     # -----
     # solve
     # -----
 
     def test_solve_1 (self) :
-        r = StringIO("1 10\n100 200\n201 210\n900 1000\n")
+        r = StringIO("1:\n30878\n2647871\n1283744\n2488120\n317050\n1904905\n")
         w = StringIO()
         netflix_solve(r, w)
-        self.assertEqual(w.getvalue(), "1 10 20\n100 200 125\n201 210 89\n900 1000 174\n")
-
-    def test_solve_2 (self) :
-        r = StringIO("13954 365154\n813482 915698\n190893 442183\n153758 392830\n")
-        w = StringIO()
-        netflix_solve(r, w)
-        self.assertEqual(w.getvalue(), "13954 365154 443\n813482 915698 525\n190893 442183 449\n153758 392830 443\n")
-
-    def test_solve_3 (self) :
-        r = StringIO("1 2\n2 1\n1 4\n4 1\n")
-        w = StringIO()
-        netflix_solve(r, w)
-        self.assertEqual(w.getvalue(), "1 2 2\n2 1 2\n1 4 8\n4 1 8\n")
+        self.assertEqual(w.getvalue(), '1:\n3.8\n3.8\n3.8\n3.8\n3.8\n3.8\n1.13542574968\n')
+     #   self.assertEqual(w.getvalue(), "1:\n3.7\n3.3\n3.6\n4.7\n3.7\n3.9\n") 
 
 # ----
 # main
