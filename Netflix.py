@@ -8,6 +8,8 @@
 
 import numpy
 import json
+import requests
+import os
 #import zip
 
 # ------------
@@ -170,23 +172,31 @@ def netflix_solve(r, w):
     # w.write("}") 
 
 
+    if os.path.isfile('/u/ebanner/netflix-tests/scm2454-movie_cache'):
+        with open('/u/ebanner/netflix-tests/scm2454-movie_cache') as data_file:
+            movie_ave_score = json.load(data_file)
+    else:
+        movie_ave_score = requests.get('http://www.cs.utexas.edu/users/ebanner/netflix-tests/scm2454-movie_cache').json() 
 
-    with open('/u/ebanner/netflix-tests/scm2454-movie_cache') as data_file:
-        movie_ave_score = json.load(data_file)
+    if os.path.isfile('/u/ebanner/netflix-tests/scm2454-user_cache'):
+        with open('/u/ebanner/netflix-tests/scm2454-user_cache') as data_file:
+            cust_ave_score = json.load(data_file)
 
-    with open('/u/ebanner/netflix-tests/scm2454-user_cache') as data_file:
-        cust_ave_score = json.load(data_file)
+    else:
+        cust_ave_score = requests.get('http://www.cs.utexas.edu/users/ebanner/netflix-tests/sscm2454-user_cache').json()
+
     
-    with open('UserContent.json') as data_file:
-        cust_rating_count = json.load(data_file)
+    # with open('UserContent.json') as data_file:
+    #     cust_rating_count = json.load(data_file)
 
-    with open('movie_rating_count.json') as data_file:
-        movie_rating_count = json.load(data_file)
+    # with open('movie_rating_count.json') as data_file:
+    #     movie_rating_count = json.load(data_file)
 
 
     total_ratings = 0
     total_users = 0
     total_max = 0
+<<<<<<< HEAD
     for i in cust_rating_count:
         cur_count = int(cust_rating_count[str(i)]["count"])
         total_users += 1;
@@ -194,6 +204,22 @@ def netflix_solve(r, w):
         if (cur_count) > total_max:
             total_max = cur_count
     total_rating_count_ave = total_ratings // total_users
+=======
+    # for i in cust_rating_count:
+    #     cur_count = int(cust_rating_count[str(i)]["count"])
+    #     # cur_ave = float(cust_rating_count[str(i)]["ave_by_movie"])
+    #     # print("count " + str(cur_count))
+    #     # print("ave " + str(cur_ave))
+    #     total_users += 1;
+    #     total_ratings += cur_count
+    #     if (cur_count) > total_max:
+    #         total_max = cur_count
+    # total_rating_count_ave = total_ratings // total_users
+    # print("total_ratings" + str(total_ratings))
+    # print("total_users" + str(total_users))
+    # print("total max" + str(total_max))
+    # print("total rating count ave" + str(total_rating_count_ave))
+>>>>>>> 72e3d7869336b69e117ff7860d9f4d998d9fc796
     current_movie = -1
     index = 20
     for num in r:
@@ -203,10 +229,38 @@ def netflix_solve(r, w):
             netflix_print(w, num)
             current_movie = i
         else:
+<<<<<<< HEAD
             # print("movie: " + str(movie_ave_score[str(current_movie)]))
             # print("cust: " + str(cust_ave_score[str(i)]))
             v = netflix_eval(movie_ave_score[str(current_movie)], cust_ave_score[str(i)])
             # print("v: " + str(v))
+=======
+            # current_movie_rating_count = movie_rating_count[str(current_movie)]
+            # movie_skew = 1
+            # if current_movie_rating_count > 50000:
+            #     movie_skew *= 1.1
+            # else: 
+            #     if current_movie_rating_count > 20000:
+            #         movie_skew *= 1.2
+            #     else:
+            #         if current_movie_rating_count > 5000:
+            #             movie_skew *= 1.4
+            #         else:
+            #             movie_skew *= 1.6
+            # if abs(int(cust_rating_count[str(i)]["count"]) - total_rating_count_ave) > 7000:
+            #     user_skew = ((.5 * abs(.5 - abs(int(cust_rating_count[str(i)]["count"]) - total_rating_count_ave) // (total_max - total_rating_count_ave)))) // 2
+            #     v = round(3.7 + (user_skew * float(movie_ave_score[str(current_movie)]) - 3.7) + ((1- user_skew) * float(cust_ave_score[str(i)]) - 3.7), 2)
+            # else:
+            v = round(3.7 + (float(movie_ave_score[str(current_movie)]) - 3.7) + (float(cust_ave_score[str(i)]) - 3.7), 2)
+            # if v > 5:
+            #     v = 5          
+            # if abs(int(cust_rating_count[str(i)]["count"]) - total_rating_count_ave) > 40000:
+            #     user_skew = ((.5 * abs(.5 - abs(int(cust_rating_count[str(i)]["count"]) - total_rating_count_ave) // (total_max - total_rating_count_ave))))* 2
+            #     v = netflix_eval(movie_skew * user_skew * movie_ave_score[str(current_movie)] + cust_rating_count[str(i)]["ave_by_movie"], (2 - movie_skew) * (2 - user_skew) * cust_ave_score[str(i)])
+            # else:          
+            #     v = netflix_eval(movie_skew * movie_ave_score[str(current_movie)] + cust_rating_count[str(i)]["ave_by_movie"], (2 - movie_skew) * cust_ave_score[str(i)])
+            # final = netflix_eval(.5*(3.228), 1.5*(v))
+>>>>>>> 72e3d7869336b69e117ff7860d9f4d998d9fc796
             netflix_print(w, v)
         # remove this stuff later
         # index -= 1
