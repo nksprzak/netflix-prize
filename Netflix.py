@@ -8,8 +8,8 @@
 
 import numpy
 import json
-import requests
 import os
+import requests
 #import zip
 
 # ------------
@@ -34,11 +34,12 @@ def netflix_read(s):
 # netflix_eval
 # ------------
 
-def netflix_eval(movie_offset, user_offset):
+def netflix_eval(movie_ave, cust_ave):
     """
     ....
     """
-    return round(3.7 + (float(movie_offset) - 3.7) + (float(movie_offset) - 3.7), 1)
+    # todo: include skew
+    return int(round(numpy.mean([movie_ave, cust_ave])))
 
 
 # ----------------
@@ -65,7 +66,7 @@ def netflix_print(w, i):
     j the end       of the range, inclusive
     v the max cycle length
     """
-    w.write(str(i).strip("\n") + "\n")
+    w.write(str(i).strip("\n") + " " + "\n")
 
 # -------------
 # netflix_solve
@@ -172,6 +173,7 @@ def netflix_solve(r, w):
     # w.write("}") 
 
 
+
     if os.path.isfile('/u/ebanner/netflix-tests/scm2454-movie_cache'):
         with open('/u/ebanner/netflix-tests/scm2454-movie_cache') as data_file:
             movie_ave_score = json.load(data_file)
@@ -184,29 +186,15 @@ def netflix_solve(r, w):
         with open('/u/ebanner/netflix-tests/scm2454-user_cache') as data_file:
             cust_ave_score = json.load(data_file)
     else:
-        response = requests.get("http://www.cs.utexas.edu/users/ebanner/netflix-tests/sscm2454-user_cache")
+        response = requests.get("http://www.cs.utexas.edu/users/ebanner/netflix-tests/scm2454-user_cache")
         cust_ave_score = response.json()
-
-    
-    # with open('UserContent.json') as data_file:
-    #     cust_rating_count = json.load(data_file)
-
-    # with open('movie_rating_count.json') as data_file:
-    #     movie_rating_count = json.load(data_file)
+    with open('UserContent.json') as data_file:
+        cust_rating_count = json.load(data_file)
 
 
-    total_ratings = 0
-    total_users = 0
-    total_max = 0
-
-    # for i in cust_rating_count:
-    #     cur_count = int(cust_rating_count[str(i)]["count"])
-    #     total_users += 1;
-    #     total_ratings += cur_count
-    #     if (cur_count) > total_max:
-    #         total_max = cur_count
-    # total_rating_count_ave = total_ratings // total_users
-
+    # total_ratings = 0
+    # total_users = 0
+    # total_max = 0
     # for i in cust_rating_count:
     #     cur_count = int(cust_rating_count[str(i)]["count"])
     #     # cur_ave = float(cust_rating_count[str(i)]["ave_by_movie"])
@@ -221,7 +209,6 @@ def netflix_solve(r, w):
     # print("total_users" + str(total_users))
     # print("total max" + str(total_max))
     # print("total rating count ave" + str(total_rating_count_ave))
-
     current_movie = -1
     index = 20
     for num in r:
@@ -231,11 +218,6 @@ def netflix_solve(r, w):
             netflix_print(w, num)
             current_movie = i
         else:
-
-            # print("movie: " + str(movie_ave_score[str(current_movie)]))
-            # print("cust: " + str(cust_ave_score[str(i)]))
-            v = netflix_eval(movie_ave_score[str(current_movie)], cust_ave_score[str(i)])
-            # print("v: " + str(v))
             # current_movie_rating_count = movie_rating_count[str(current_movie)]
             # movie_skew = 1
             # if current_movie_rating_count > 50000:
@@ -252,7 +234,7 @@ def netflix_solve(r, w):
             #     user_skew = ((.5 * abs(.5 - abs(int(cust_rating_count[str(i)]["count"]) - total_rating_count_ave) // (total_max - total_rating_count_ave)))) // 2
             #     v = round(3.7 + (user_skew * float(movie_ave_score[str(current_movie)]) - 3.7) + ((1- user_skew) * float(cust_ave_score[str(i)]) - 3.7), 2)
             # else:
-            v = round(3.7 + (float(movie_ave_score[str(current_movie)]) - 3.7) + (float(cust_ave_score[str(i)]) - 3.7), 2)
+            v = round(3.7 + (float(movie_ave_score[str(current_movie)]) - 3.7) + (float(cust_ave_score[str(i)]) - 3.7), 1)
             # if v > 5:
             #     v = 5          
             # if abs(int(cust_rating_count[str(i)]["count"]) - total_rating_count_ave) > 40000:
@@ -278,5 +260,5 @@ def netflix_solve(r, w):
             actArr.append(x)
             estArr.append(y)
 
-    res = netflix_get_rsme(actArr, estArr)
+    res = round(netflix_get_rsme(actArr, estArr), 2)
     netflix_print(w, res)       
