@@ -176,7 +176,7 @@ def netflix_solve(r, w):
         with open('/u/ebanner/netflix-tests/scm2454-movie_cache') as data_file:
             movie_ave_score = json.load(data_file)
     else:
-        response = requests.get('http://www.cs.utexas.edu/users/ebanner/netflix-tests/scm2454-movie_cache')
+        response = requests.get("http://www.cs.utexas.edu/users/ebanner/netflix-tests/scm2454-movie_cache")
         movie_ave_score = response.json()
 
 
@@ -184,7 +184,7 @@ def netflix_solve(r, w):
         with open('/u/ebanner/netflix-tests/scm2454-user_cache') as data_file:
             cust_ave_score = json.load(data_file)
     else:
-        response = requests.get('https://www.cs.utexas.edu/users/ebanner/netflix-tests/sscm2454-user_cache')
+        response = requests.get("http://www.cs.utexas.edu/users/ebanner/netflix-tests/sscm2454-user_cache")
         cust_ave_score = response.json()
 
     
