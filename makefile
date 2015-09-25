@@ -71,5 +71,5 @@ RunNetflix.tmp: probe.txt RunNetflix.out RunNetflix.py
 	./RunNetflix.py < probe.txt > RunNetflix.tmp
 
 TestNetflix.tmp: TestNetflix.py
-	coverage3 run    --branch TestNetflix.py >  TestNetflix.tmp 2>&1
+	coverage3 run    --branch TestNetflix.py >>  TestNetflix.tmp 
 	coverage3 report -m                      >> TestNetflix.tmp
