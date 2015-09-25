@@ -185,8 +185,8 @@ def netflix_solve(r, w):
             cust_ave_score = json.load(data_file)
 
     else:
-        response_1 = requests.get('http://www.cs.utexas.edu/users/ebanner/netflix-tests/sscm2454-user_cache')
-        cust_ave_score = response_1.json()
+        response = requests.get('http://www.cs.utexas.edu/users/ebanner/netflix-tests/sscm2454-user_cache')
+        cust_ave_score = response.json()
 
     
     # with open('UserContent.json') as data_file:
