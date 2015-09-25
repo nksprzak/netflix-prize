@@ -93,8 +93,6 @@ def netflix_solve(r, w):
     else:
         response = requests.get("http://www.cs.utexas.edu/users/ebanner/netflix-tests/scm2454-user_cache")
         cust_ave_score = response.json()
-    with open('UserContent.json') as data_file:
-        cust_rating_count = json.load(data_file)
 
     current_movie = -1
     index = 20
