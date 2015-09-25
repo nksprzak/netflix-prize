@@ -53,31 +53,31 @@ class TestNetflix (TestCase) :
 
     def test_eval_1 (self) :
         v = netflix_eval(3.49, 4.63)
-        self.assertEqual(v, 3.3)
+        self.assertEqual(v, 4)
 
     def test_eval_2 (self) :
         v = netflix_eval(3.49, 4.00)
-        self.assertEqual(v, 3.3)
+        self.assertEqual(v, 4)
 
     def test_eval_3 (self) :
         v = netflix_eval(4.19, 3.79)
-        self.assertEqual(v, 4.7)
+        self.assertEqual(v, 4)
 
     def test_eval_4 (self) :
         v = netflix_eval(3.30, 4.38)
-        self.assertEqual(v, 2.9)
+        self.assertEqual(v, 4)
 
     def test_eval_5 (self) :
         v = netflix_eval(3.30, 4.17)
-        self.assertEqual(v, 2.9)
+        self.assertEqual(v, 4)
 
     def test_eval_6 (self) :
         v = netflix_eval(3.60, 3.44)
-        self.assertEqual(v, 3.5)
+        self.assertEqual(v, 4)
 
     def test_eval_7 (self) :
         v = netflix_eval(2.79, 4.00)
-        self.assertEqual(v, 1.9)
+        self.assertEqual(v, 3)
 
     # -----
     # print
@@ -86,22 +86,22 @@ class TestNetflix (TestCase) :
     def test_print_1 (self) :
         w = StringIO()
         netflix_print(w, 1.9)
-        self.assertEqual(w.getvalue(), "1.9\n")
+        self.assertEqual(w.getvalue(), "1.9 \n")
 
     def test_print_2 (self) :
         w = StringIO()
         netflix_print(w, 2.79)
-        self.assertEqual(w.getvalue(), "2.79\n")
+        self.assertEqual(w.getvalue(), "2.79 \n")
 
     def test_print_3 (self) :
         w = StringIO()
         netflix_print(w, 3.5)
-        self.assertEqual(w.getvalue(), "3.5\n")
+        self.assertEqual(w.getvalue(), "3.5 \n")
 
     def test_print_4 (self) :
         w = StringIO()
         netflix_print(w, 1904905)
-        self.assertEqual(w.getvalue(), "1904905\n")
+        self.assertEqual(w.getvalue(), "1904905 \n")
 
     # -----
     # solve
@@ -111,18 +111,18 @@ class TestNetflix (TestCase) :
         r = StringIO("1:\n30878\n2647871\n1283744\n2488120\n317050\n1904905\n")
         w = StringIO()
         netflix_solve(r, w)
-        self.assertEqual(w.getvalue(), '1:\n3.7\n3.3\n3.6\n4.7\n3.7\n3.9\n0.97\n')
+        self.assertEqual(w.getvalue(), '1: \n3.7 \n3.3 \n3.6 \n4.7 \n3.7 \n3.9 \n0.97 \n')
     
     def test_solve_2 (self) :
         r = StringIO("1000:\n2326571\n977808\n1010534\n1861759\n79755\n98259\n")
         w = StringIO()
         netflix_solve(r, w)
-        self.assertEqual(w.getvalue(), '1000:\n3.2\n2.9\n2.6\n4.6\n3.7\n3.3\n0.97\n')
+        self.assertEqual(w.getvalue(), '1000: \n3.2 \n2.9 \n2.6 \n4.6 \n3.7 \n3.3 \n0.97 \n')
     def test_solve_3 (self) :
         r = StringIO("10007:\n1204847\n2160216\n248206\n835054\n1064667\n2419805\n")
         w = StringIO()
         netflix_solve(r, w)
-        self.assertEqual(w.getvalue(), '10007:\n2.0\n2.6\n2.2\n2.2\n2.0\n2.5\n0.97\n')
+        self.assertEqual(w.getvalue(), '10007: \n2.0 \n2.6 \n2.2 \n2.2 \n2.0 \n2.5 \n0.97 \n')
      #   self.assertEqual(w.getvalue(), "1:\n3.7\n3.3\n3.6\n4.7\n3.7\n3.9\n") 
 
 # ----
