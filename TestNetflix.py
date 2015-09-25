@@ -45,7 +45,7 @@ class TestNetflix (TestCase) :
     def test_read_3 (self) :
         s = "1904905\n"
         i, j = netflix_read(s)
-        self.assertNotEquals(i, 1904906)
+        self.assertNotEqual(i, 1904906)
 
     # ----
     # eval
@@ -123,7 +123,6 @@ class TestNetflix (TestCase) :
         w = StringIO()
         netflix_solve(r, w)
         self.assertEqual(w.getvalue(), '10007: \n2.0 \n2.6 \n2.2 \n2.2 \n2.0 \n2.5 \n0.97 \n')
-     #   self.assertEqual(w.getvalue(), "1:\n3.7\n3.3\n3.6\n4.7\n3.7\n3.9\n") 
 
 # ----
 # main
