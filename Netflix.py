@@ -123,4 +123,4 @@ def netflix_solve(r, w):
             estArr.append(y)
 
     res = round(netflix_get_rsme(actArr, estArr), 2)
-    w.write("RMSE: " + str(res)     
+    w.write("RMSE: " + str(res))     
