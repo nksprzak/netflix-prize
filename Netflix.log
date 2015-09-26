@@ -1,0 +1,210 @@
+commit 89e45424555b45b5ed24364ea718369f3590147a
+Author: Mark Daniel <mark.r.daniel@gmail.com>
+Date:   Fri Sep 25 19:59:17 2015 -0500
+
+    adding netflix.in
+
+commit 50261a128c81e413ac48dd3c75c2f1b238fcb29b
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Sep 24 21:58:39 2015 -0500
+
+    cleaning up
+
+commit ee4aeea8486bf1c8aca5e10d3a82397231c41061
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Sep 24 21:56:39 2015 -0500
+
+    adding TestNetflix.out
+
+commit bf02cc66235316adebcd428b0cd86efa65090b90
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Sep 24 21:55:26 2015 -0500
+
+    delete .coverage
+
+commit 07a6b72c0f54cc6b179cee31470bcfcb502825ca
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Sep 24 21:53:49 2015 -0500
+
+    adding netflix.html
+
+commit b4cf1993e5b2940ff61c142ab70b468883044fe1
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Sep 24 21:33:04 2015 -0500
+
+    travis working
+
+commit 1bf38ec38bab44156db63955a01ce71c412730b9
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Sep 24 21:25:39 2015 -0500
+
+    fixing for travis
+
+commit 7e79a825808d3e8b7b815b8e4e8cc569a3e96618
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Sep 24 21:22:39 2015 -0500
+
+    cleaning up github and Netflix.py
+
+commit c3f33c18f94d462b47a2d472482983d488ab6471
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Sep 24 21:01:44 2015 -0500
+
+    fixed testnetflix for travis
+
+commit f80892a0894b97de8b45eccdb4546288c8cf4718
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Sep 24 20:54:18 2015 -0500
+
+    travis fix
+
+commit 9c6725c810473062b5e45e299e06fb60f532b0e2
+Author: Mark Daniel <md26977@cs.utexas.edu>
+Date:   Thu Sep 24 20:33:53 2015 -0500
+
+    updated netflix and make
+
+commit 152645df0f4b2015daeefdebc113242cf6958724
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Sep 24 19:40:21 2015 -0500
+
+    fixing for travis
+
+commit fe73009b114c80e21022ed44ad071994bc7f9677
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Sep 24 19:37:58 2015 -0500
+
+    travis cache issue
+
+commit ad9ccdd5760a995cc62c4288054ddda58e1a22be
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Sep 24 19:29:12 2015 -0500
+
+    travis fix
+
+commit 93bf708a27b44bdce15629d7c6affde9dae282a6
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Sep 24 19:22:43 2015 -0500
+
+    fixing git comments and tryin to get travis build
+
+commit d3b260eb0d68c6834dfb79d1f5f20837f13559d6
+Merge: 1af7305 72e3d78
+Author: Mark Daniel <md26977@cs.utexas.edu>
+Date:   Thu Sep 24 01:11:03 2015 -0500
+
+    got test cases working
+
+commit 1af7305a88eb34af1ca31da9edde4be87ac732f8
+Author: Mark Daniel <md26977@cs.utexas.edu>
+Date:   Thu Sep 24 01:09:41 2015 -0500
+
+    got test cases working
+
+commit 72e3d7869336b69e117ff7860d9f4d998d9fc796
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Wed Sep 23 18:57:21 2015 -0500
+
+    changed requests for travis
+
+commit 661679d18a793bf57274609118d9bb107f84d7da
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Wed Sep 23 18:46:59 2015 -0500
+
+    trying to get working travis
+
+commit a96fbd12babef3555c7383f3b9f88672e70d58bb
+Author: Mark Daniel <md26977@cs.utexas.edu>
+Date:   Tue Sep 22 22:09:35 2015 -0500
+
+    got under 1. closes #1, closes #3, closes #4, closes #5, closes #10, closes #6
+
+commit 680ccab84845b1086981ff4488b2239d3ae95b64
+Author: Mark Daniel <md26977@cs.utexas.edu>
+Date:   Tue Sep 22 21:11:38 2015 -0500
+
+    made a crazy formula
+
+commit 1b19b885db37fae4cfb56cbdd09a70ee3505326c
+Author: Mark Daniel <md26977@cs.utexas.edu>
+Date:   Mon Sep 21 20:08:26 2015 -0500
+
+    got movie age cache set up
+
+commit b401ce83bfd49abb6c2a6c1037c16faa82c18183
+Author: Mark Daniel <md26977@cs.utexas.edu>
+Date:   Mon Sep 21 18:12:12 2015 -0500
+
+    got rmse to 1.02
+
+commit 1348faa843474bc728f310908a539204b391e3ff
+Author: Mark Daniel <md26977@cs.utexas.edu>
+Date:   Sun Sep 20 19:38:47 2015 -0500
+
+    improved slightly
+
+commit fa06f9eed554fcf1d9d2a3035cc3f5ad6bb3e711
+Author: Mark Daniel <md26977@cs.utexas.edu>
+Date:   Sun Sep 20 19:27:43 2015 -0500
+
+    got user rating count working
+
+commit 2af645703cf0bb70bd5235751ddedea11fb78abe
+Author: Mark Daniel <md26977@cs.utexas.edu>
+Date:   Sun Sep 20 17:05:51 2015 -0500
+
+    built cust_num cache
+
+commit 2a3493e26b32155aee3a9074532c01d252389cb8
+Author: Mark Daniel <md26977@cs.utexas.edu>
+Date:   Fri Sep 18 16:25:16 2015 -0500
+
+    got time under one minute and got rmse working. closes #7
+
+commit 9281dbe7bf3ca963e48f65b6d5116092549166f8
+Author: Mark Daniel <md26977@cs.utexas.edu>
+Date:   Fri Sep 18 15:06:50 2015 -0500
+
+    changed output format
+
+commit f43b46b6b8815bb85a4da7addf02e403329f8d30
+Author: Mark Daniel <md26977@cs.utexas.edu>
+Date:   Fri Sep 18 14:54:31 2015 -0500
+
+    got travis working. closes #2
+
+commit 3c2e568e4cb87bbc927ccd53e1f23a372219362e
+Author: Mark Daniel <md26977@cs.utexas.edu>
+Date:   Fri Sep 18 14:50:28 2015 -0500
+
+    got travis working. closes #2
+
+commit b299ba4ca3dc27429ac1d50316c90c858e9d0dd5
+Author: Mark Daniel <md26977@cs.utexas.edu>
+Date:   Thu Sep 17 23:24:47 2015 -0500
+
+    got a basic eval working
+
+commit 523502539cf7ccdd7d38ba9f668d3a40da2cedb6
+Author: Mark Daniel <mark.r.daniel@gmail.com>
+Date:   Thu Sep 17 22:47:02 2015 -0500
+
+    added json readers and averaging logic
+
+commit 1ac7cbdee798eff736c98c900602828a50ef408d
+Author: Mark Daniel <mark.r.daniel@gmail.com>
+Date:   Thu Sep 17 00:30:45 2015 -0500
+
+    added some logic to the reading
+
+commit dda9ebcbc94c09a6f9c5d6f87658f1427eebd2f4
+Author: Mark Daniel <mark.r.daniel@gmail.com>
+Date:   Thu Sep 17 00:08:14 2015 -0500
+
+    got netflix_read working I think
+
+commit 5153fb5aae2178882bea9eddd94ff5d6d2b6c985
+Author: Mark Daniel <mark.r.daniel@gmail.com>
+Date:   Wed Sep 16 23:15:22 2015 -0500
+
+    added some skeleton files
