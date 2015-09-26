@@ -1,3 +1,50 @@
+commit 0df429d585df3f24aa4613c8d3d030976128f6e6
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Fri Sep 25 21:35:54 2015 -0500
+
+    fixed spacing
+
+commit b2f750c3af72d5821231bd245a8f3d9a9af01f91
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Fri Sep 25 21:33:09 2015 -0500
+
+    adding
+
+commit 46b73e0a9af9301ad649847fd346de84063307b4
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Fri Sep 25 21:26:18 2015 -0500
+
+    added missing paratheses
+
+commit bc49353bde7ea46ce3bb2e23db3e1429d1d5f35a
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Fri Sep 25 21:25:02 2015 -0500
+
+    another rmse output fix for travis
+
+commit 798f211d88f4c3e68355407cdd43557aefdf4496
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Fri Sep 25 21:23:14 2015 -0500
+
+    fixing rmse output
+
+commit 8cf393da42a664aa02e2b40a1365993b798b1092
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Fri Sep 25 21:19:19 2015 -0500
+
+    fixing output
+
+commit 22acc556c758d135f2268eab57ac73ef40a69b38
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Fri Sep 25 21:16:39 2015 -0500
+
+    updating RMSE for output
+
+commit 2f8a64ba5ec41295d204ac22b2bbd488a2cbc7ac
+Author: Mark Daniel <md26977@cs.utexas.edu>
+Date:   Fri Sep 25 20:03:33 2015 -0500
+
+    adding log
 commit 89e45424555b45b5ed24364ea718369f3590147a
 Author: Mark Daniel <mark.r.daniel@gmail.com>
 Date:   Fri Sep 25 19:59:17 2015 -0500
