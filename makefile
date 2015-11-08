@@ -56,7 +56,6 @@ status:
 	git remote -v
 	git status
 
-test: RunNetflix.tmp TestNetflix.tmp
 
 netflix-tests:
 	git clone https://github.com/cs373-fall-2015/netflix-tests.git
